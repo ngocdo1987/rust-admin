@@ -1,11 +1,11 @@
 {% macro list(name, title, data, value) -%}
 <div class="layui-inline">
-    <label for="{{name}}"> {{title}}: </label>
+    <label for="{{ name }}"> {{ title }}: </label>
     <div class="layui-inline layui-show-xs-block" style="padding-right: 10px;">
-        <select name="{{name}}">
-            <option value="">Please choose{{title}}</option>
+        <select name="{{ name }}">
+            <option value="">Please choose {{ title }}</option>
             {% for k,val in data -%}
-            <option value="{{k}}" {% if k == value %}selected="selected"{% endif %}>{{val}}</option>
+            <option value="{{k}}" {% if k == value %}selected="selected"{% endif %}>{{ val }}</option>
             {% endfor -%}
         </select>
     </div>
@@ -16,7 +16,7 @@
 <div class="layui-inline">
     <label for="{{name}}"> {{title}}: </label>
     <div class="layui-inline layui-show-xs-block" style="padding-right: 10px;">
-        <input type="text" name="{{name}}"  placeholder="Please enter{{title}}" autocomplete="off" class="layui-input" value="{{value}}" />
+        <input type="text" name="{{name}}"  placeholder="Please enter {{title}}" autocomplete="off" class="layui-input" value="{{value}}" />
     </div>
 </div>
 {% endmacro input -%}
@@ -51,8 +51,8 @@
     <div class="layui-inline layui-show-xs-block" style="padding-right: 10px;">
         <select name="{{name}}">
             <option value="">Please choose{{title}}</option>
-            <option value="0" {% if value == "0" %}selected="selected"{% endif %}>no</option>
-            <option value="1" {% if value == "1" %}selected="selected"{% endif %}>yes</option>
+            <option value="0" {% if value == "0" %}selected="selected"{% endif %}>No</option>
+            <option value="1" {% if value == "1" %}selected="selected"{% endif %}>Yes</option>
         </select>
     </div>
 </div>

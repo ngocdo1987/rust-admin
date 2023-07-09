@@ -243,7 +243,7 @@ pub trait Controller {
         }
     }
 
-    /// 删除之后处理
+    /// Treatment after deleting
     fn delete_after() { }
 }
 
