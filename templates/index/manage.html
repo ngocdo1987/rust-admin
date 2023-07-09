@@ -1,0 +1,131 @@
+<!doctype html>
+<html class="x-admin-sm">
+    <head>
+        <title>BE management system</title>
+        {% include "_elements/head.html" -%}
+        <script>
+            // Whether to turn on the refresh memory TAB function
+            // var is_remember = false;
+        </script>
+    </head>
+    <body class="index">
+        <!-- Top start -->
+        <div class="container">
+            <div class="logo">
+                <a href="./index.html">BE management system</a></div>
+            <div class="left_open">
+                <a><i title="Expand the left column" class="iconfont">&#xe699;</i></a>
+            </div>
+            <ul class="layui-nav left fast-add" lay-filter="">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">+Add</a>
+                    <dl class="layui-nav-child">
+                        <!-- Secondary menu -->
+                        <dd>
+                            <a onclick="xadmin.open('maximize','http://www.baidu.com','','',true)">
+                                <i class="iconfont">&#xe6a2;</i>Maximize</a></dd>
+                        <dd>
+                            <a onclick="xadmin.open('Volume automatic width height','http://www.baidu.com')">
+                                <i class="iconfont">&#xe6a8;</i>Volume automatic width height</a></dd>
+                        <dd>
+                            <a onclick="xadmin.open('Plug the specified width height','http://www.baidu.com',500,300)">
+                                <i class="iconfont">&#xe6a8;</i>Plug the specified width height</a></dd>
+                        <dd>
+                            <a onclick="xadmin.add_tab('Open in TAB','member-list.html')">
+                                <i class="iconfont">&#xe6b8;</i>Open in TAB</a></dd>
+                        <dd>
+                            <a onclick="xadmin.add_tab('Open the refresh in the TAB','member-del.html',true)">
+                                <i class="iconfont">&#xe6b8;</i>Open the refresh in the TAB</a></dd>
+                    </dl>
+                </li>
+            </ul>
+            <ul class="layui-nav right" lay-filter="">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">admin</a>
+                    <dl class="layui-nav-child">
+                        <!-- Secondary menu -->
+                        <dd> <a onclick="xadmin.open('修改密码','/index/change_pwd', 600, 450)">change Password</a></dd>
+                        <!--<dd> <a onclick="xadmin.open('Switch account','http://www.baidu.com')">Switch account</a></dd>-->
+                        <dd> <a href="javascript:" id="linkLogout">Exit system</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item to-index">
+                    <a href="/">Front desk homepage</a></li>
+            </ul>
+        </div>
+        <!-- End -->
+        <!-- In the middle -->
+        <!-- The left menu starts -->
+        <div class="left-nav">
+            <div id="side-nav">
+                <ul id="nav">
+                    {% for menu in menus -%}
+                    {% if menu.is_show == 1 -%}
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="{{ menu.name }}">&#xe726;</i> <cite>{{ menu.name }}</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            {% for sub in menu.menus -%}
+                            {% if sub.is_show == 1 -%}
+                            <li>
+                                <a href="javascript:;" title="{{ sub.name }}" url="{{ sub.url }}">
+                                    <i class="iconfont">&#xe6a7;</i><cite>{{ sub.name }}</cite>
+                                </a>
+                            </li>
+                            {% endif -%}
+                            {% endfor -%}
+                        </ul>
+                    </li>
+                    {% endif -%}
+                    {% endfor -%}
+                </ul>
+            </div>
+        </div>
+        <!-- <div class="x-slide_left"></div> -->
+        <!-- The left menu ends -->
+        <!-- Right main body starts -->
+        <div class="page-content">
+            <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+                <ul class="layui-tab-title">
+                    <li class="home">
+                        <i class="layui-icon">&#xe68e;</i>Background homepage</li></ul>
+                <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+                    <dl>
+                        <dd data-type="this">Close the current</dd>
+                        <dd data-type="other">Close others</dd>
+                        <dd data-type="all">Close all</dd>
+                    </dl>
+                </div>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show"> <iframe src='/index/right' frameborder="0" scrolling="yes" class="x-iframe"></iframe> </div>
+                </div>
+                <div id="tab_show"></div>
+            </div>
+        </div>
+        <div class="page-content-bg"></div>
+        <style id="theme_style"></style>
+        <!-- Right subject ends -->
+        <!-- End -->
+    </body>
+</html>
+<script type="text/javascript">
+    layui.use(['jquery', 'layer'], function() { 
+        var $ = layui.jquery, layer = layui.layer;
+        $(".sub-menu a").click(function() {  //menu
+            var that = $(this);
+            var title = that.attr("title");
+            var url = that.attr("url");
+            xadmin.add_tab(title, url);
+        });
+
+        $("#linkLogout").click(function() {  //Exit button
+            layer.confirm('Are you sure you want to exit the BE management system?', function() { 
+                $.get("/index/logout", function() { 
+                    location.href = "/";
+                });
+            });
+        });
+    });
+</script>

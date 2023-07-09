@@ -1,0 +1,50 @@
+{% extends "_layouts/index.html" -%}
+
+{% block search -%}
+{{ search::input(name="name", title="name", value=name)}}
+{{ search::input(name="remark", title="Remark", value=remark)}}
+{{ search::list(name="page_id", title="page", data=pages, value=page_id)}}
+{{ search::list(name="position_id", title="Location", data=positions, value=position_id)}}
+{{ search::yes_no(name="is_blank", title="Whether an external link", value=is_blank)}}
+{% endblock search -%}
+
+{% block options -%}
+{{option::delete_all()}} {{option::add(height=400)}} 
+{% endblock options -%}
+
+{% block content -%}
+<table class="layui-table layui-form">
+<thead>
+    <tr>
+        <th style="width: 40px"> <input type="checkbox" name=""  lay-skin="primary"> </th>
+        <th class="row-id">ID</th>
+        <th>Name</th>
+        <th>Remark</th>
+        <th>Image</th>
+        <th>Page</th>
+        <th>Location</th>
+        <th>Link address</th>
+        <th>External link?</th>
+        <th>Sort</th>
+        <th>Actions</th>
+    </tr>
+    <tbody>
+    {% for r in records -%}
+    <tr>
+        <td> <input type="checkbox" name=""  lay-skin="primary"> </td>
+        <td>{{r.id}}</td>
+        <td>{{r.name}}</td>
+        <td>{{r.remark}}</td>
+        <td>{{r.image}}</td>
+        <td>{%if r.page_id == 0%}Home page{%else%}Detail page{%endif%}</td>
+        <td>{{r.position_id|position_name}}</td>
+        <td>{{r.url}}</td>
+        <td>{{r.is_blank|yes_no}}</td>
+        <td>{{r.seq}}</td>
+        <td class="td-manage"> {{option::update(id=r.id, height=300)}} | {{option::delete(id=r.id)}} </td>
+    </tr>
+    {% endfor -%}
+    </tbody>
+</thead>
+</table>
+{% endblock content -%}

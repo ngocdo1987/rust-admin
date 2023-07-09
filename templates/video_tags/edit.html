@@ -1,0 +1,25 @@
+{% extends "_layouts/edit.html" -%}
+{% block body %}
+{{ form::input(name="name", title="name", value=row.name) }}
+{{ form::remark(value=row.remark) }}
+{{ form::seq(value=row.seq) }}
+<script>
+layui.validators = { 
+    name: function(value) { 
+        if (value.length < 2 || value.length > 20) { 
+            return 'The name length is between 2-20';
+        }
+    },
+    remark: function(value) { 
+        if (value.length > 100) { 
+            return 'Remarks cannot exceed 100';
+        }
+    },
+    seq: function(value) { 
+        if (isNaN(value)) { 
+            return 'Sort must be numbers';
+        }
+    }
+};
+</script>
+{% endblock body -%}

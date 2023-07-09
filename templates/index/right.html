@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+    <head>
+        {% include "_elements/head.html" -%}
+    </head>
+    <body>
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body ">
+                            <blockquote class="layui-elem-quote">Welcome administrator:
+                                <span class="x-red">test</span>Current time:2018-04-25 20:50:53
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">Statistics</div>
+                        <div class="layui-card-body ">
+                            <ul class="layui-row layui-col-space10 layui-this x-admin-carousel x-admin-backlog">
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>Number of members</h3>
+                                        <p> <cite>66</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>Total videos</h3>
+                                        <p> <cite>12</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>Total number of comments</h3>
+                                        <p> <cite>99</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>Total number of labels</h3>
+                                        <p> <cite>67</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-md2 layui-col-xs6">
+                                    <a href="javascript:;" class="x-admin-backlog-body">
+                                        <h3>Total number of advertising</h3>
+                                        <p> <cite>67</cite></p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6 layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">registered member
+                            <span class="layui-badge layui-bg-cyan layuiadmin-badge">this month</span></div>
+                        <div class="layui-card-body  ">
+                            <p class="layuiadmin-big-font">33,555</p>
+                            <p>Added today <span class="layuiadmin-span-color">10% <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6 layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">active user
+                            <span class="layui-badge layui-bg-cyan layuiadmin-badge">this month</span></div>
+                        <div class="layui-card-body ">
+                            <p class="layuiadmin-big-font">33,555</p>
+                            <p>Login today <span class="layuiadmin-span-color">10% <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6 layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">New video
+                            <span class="layui-badge layui-bg-cyan layuiadmin-badge">this month</span></div>
+                        <div class="layui-card-body ">
+                            <p class="layuiadmin-big-font">33,555</p>
+                            <p>Added today <span class="layuiadmin-span-color">10% <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm6 layui-col-md3">
+                    <div class="layui-card">
+                        <div class="layui-card-header">New comment
+                            <span class="layui-badge layui-bg-cyan layuiadmin-badge">this month</span></div>
+                        <div class="layui-card-body ">
+                            <p class="layuiadmin-big-font">33,555</p>
+                            <p>Added today <span class="layuiadmin-span-color">10% <i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">system message</div>
+                        <div class="layui-card-body ">
+                            <table class="layui-table">
+                                <tbody>
+                                    <tr> <th>Software version</th> <td>{{my_version}}</td></tr>
+                                    <tr> <th>operating system</th> <td>{{os_type}} - {{os_version}}</td></tr>
+                                    <tr> <th>Host address</th> <td>{{host_name}}</td></tr>
+                                    <tr> <th>Current directory</th> <td>{{current_dir}}</td></tr>
+                                    <tr> <th>CPU</th> <td>{{cpu_num}} nuclear / {{cpu_speed}} MHz</td></tr>
+                                    <tr> <th>Memory</th> <td>total {{mem_info_total}} GB, idle {{mem_info_free}} GB, Available {{mem_info_avail}} GB</td></tr>
+                                    <tr> <th>Disk information</th> <td>total {{disk_info_total}} GB, Available {{disk_info_free}} GB</td></tr>
+                                    <tr> <th>Number of processes</th> <td>{{process_count}}</td></tr>
+                                    <tr> <th>operation hours</th> <td>{{boot_time}}</td></tr>
+                                    <tr> <th>System load</th> <td>{{avg_1}} / minute,  {{avg_2}} / 5 minutes, {{avg_3}} / 15 minutes</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">development team</div>
+                        <div class="layui-card-body ">
+                            <table class="layui-table">
+                                <tbody>
+                                    <tr>
+                                        <th>all rights reserved</th>
+                                        <td>
+                                            rust-admin <br />
+                                            <a href="#" target="_blank">Visit the official website</a>  <br />
+                                            download link: <a href="#" target="_blank">https://github.com</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Developer</th>
+                                        <td>Ngoc Do(Email: nguyenanhngoc.do@gmail.com)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <style id="welcome_style"></style>
+                <div class="layui-col-md12">
+                    <blockquote class="layui-elem-quote layui-quote-nm">This system is based on x-Admin、layui开发，Provide technical support from Rust-Admin。</blockquote></div>
+            </div>
+        </div>
+        </div>
+    </body>
+</html>

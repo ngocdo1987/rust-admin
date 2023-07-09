@@ -1,0 +1,50 @@
+{% extends "_layouts/edit.html" -%}
+{% block body %}
+<div class="layui-form-item">
+    <label for="parent_id" class="layui-form-label"> <span class="x-red">*</span>Parent menu: </label>
+    <div class="layui-input-inline">
+        <select name="parent_id" lay-verify="required">
+            <option value="0">Unlimited menu</option>
+            {% for key, value in menus -%}
+            <option value="{{key}}" {% if row.parent_id == value %}selected="selected"{% endif %}>{{value}}</option>
+            {% endfor -%}
+        </select>
+    </div>
+    <div class="layui-form-mid layui-word-aux"> </div>
+</div>
+{{ form::input(name="name", title="Menu name", value=row.name) }}
+<div class="layui-form-item">
+    <label for="level_id" class="layui-form-label"> <span class="x-red">*</span>Menu level: </label>
+    <div class="layui-input-inline">
+        <select name="level_id" lay-verify="required">
+            <option value="0" {% if row.level_id == 0 %}selected="selected"{% endif %}>Main menu</option>
+            <option value="1" {% if row.level_id == 1 %}selected="selected"{% endif %}>Secondary menu</option>
+        </select>
+    </div>
+    <div class="layui-form-mid layui-word-aux"> </div>
+</div>
+{{ form::input(name="url", title="URL", value=row.url, length=380) }}
+{{ form::yes_no(name="is_blank", title="External link", value=row.is_blank) }}
+{{ form::seq(value=row.seq) }}
+{{ form::state(name="state", title="State", value=row.state) }}
+{{ form::yes_no(name="is_show", title="Display", value=row.is_show) }}
+<script>
+layui.validators = { 
+    name: function(value) { 
+        if (value.length < 2 || value.length > 20) { 
+            return 'Must enter the correct menu name';
+        }
+    },
+    url: function(value) { 
+        if (value == "") { 
+            return 'The route address cannot be empty';
+        }
+    },
+    seq: function(value) { 
+        if (isNaN(value)) { 
+            return 'Sort must be effective numbers';
+        }
+    }
+};
+</script>
+{% endblock body -%}

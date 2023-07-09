@@ -1,0 +1,47 @@
+{% extends "_layouts/index.html" -%}
+
+{% block search -%}
+{{ search::input(name="name", title="Menu name", value=name)}}
+{{ search::state(value=state)}}
+{{ search::input(name="url", title="URL", value=url)}}
+{{ search::yes_no(name="is_blank", title="External link", value=is_blank)}}
+{% endblock search -%}
+
+{% block options -%}
+{{option::delete_all()}} {{option::add(height=550)}} 
+{% endblock options -%}
+
+{% block content -%}
+<table class="layui-table layui-form">
+<thead>
+    <tr>
+        <th style="width: 40px"> <input type="checkbox" name=""  lay-skin="primary"> </th>
+        <th class="row-id">ID</th>
+        <th>Parent menu</th>
+        <th>Menu name</th>
+        <th>Menu level</th>
+        <th>State</th>
+        <th>URL</th>
+        <th>External link</th>
+        <th>Display</th>
+        <th>Actions</th>
+    </tr>
+    <tbody>
+    {% for r in records -%}
+    <tr>
+        <td> <input type="checkbox" name=""  lay-skin="primary"> </td>
+        <td>{{r.id }}</td>
+        <td>{{r.parent_id | menu_name}}</td>
+        <td>{{r.name }}</td>
+        <td>{% if r.level_id == 0 %}Main menu{% else %}Secondary menu{% endif %}</td>
+        <td>{{r.state | state_name}}</td>
+        <td>{{r.url }}</td>
+        <td>{{r.is_blank|yes_no}}</td>
+        <td>{{r.is_show|yes_no}}</td>
+        <td class="td-manage"> {{option::update(id=r.id, height=550)}} | {{option::delete(id=r.id)}} </td>
+    </tr>
+    {% endfor -%}
+    </tbody>
+</thead>
+</table>
+{% endblock content -%}

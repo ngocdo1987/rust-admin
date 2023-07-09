@@ -1,0 +1,19 @@
+server { 
+    
+    listen 80; #Nginx monitoring port
+    server_name admin.rs; #External domain name
+    root your_path; #Directory location of static related files
+
+    location /static/ {  #please
+        root your_static_path; #Please set the public directory here
+    }
+
+    location / { 
+        proxy_pass http://127.0.0.1:8081/; #Background Rust-Admin's monitoring address and port
+        proxy_set_header    Host             $host;#Reserve the host before the agent
+        proxy_set_header    X-Real-IP        $remote_addr;  #Reserve the real client IP before the agent
+        proxy_set_header    X-Forwarded-For  $proxy_add_x_forwarded_for;
+        proxy_set_header    HTTP_X_FORWARDED_FOR $remote_addr;  #In the case of multi -level agent, record the real IP of the client before each agent
+        proxy_redirect      default; #Specify the Location header domain in the response header returned by the proxy server and the value of the REFRESH header domain
+    }
+}

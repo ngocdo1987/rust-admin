@@ -1,0 +1,14 @@
+{% extends "_layouts/edit.html" -%}
+{% block body %}
+{{ form::input(name="name", title="Role Name", value=row.name) }}
+{{ form::input(name="remark", title="Remark", value=row.remark) }}
+<script>
+layui.validators = { 
+    name: function(value) { 
+        if (value.length < 5) { 
+            return 'Name at least 5 characters';
+        }
+    }
+};
+</script>
+{% endblock body -%}

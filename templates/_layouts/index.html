@@ -1,0 +1,117 @@
+{% import "_macros/options.html" as option -%}
+{% import "_macros/search.html" as search -%}
+{% import "_macros/options.html" as option -%}
+<!DOCTYPE html>
+<html class="x-admin-sm">
+    <head>
+        {% include "_elements/head.html" -%}
+        <style type="text/css">
+            .layui-table td, .layui-table th{ min-width: 40px; }
+            .row-id { width: 60px; }
+            .td-manage { width: 60px; text-align: center; }
+        </style>
+    </head>
+    <body>
+        <div class="x-nav">
+            <span class="layui-breadcrumb">
+                <a href="#">Front page</a>
+                {{bread_path|safe}}
+                <!--<a href="">Demo</a>
+                <a> <cite>Navigation elements</cite></a>-->
+            </span>
+            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="Refresh">
+                <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
+            </a>
+        </div>
+        <div class="layui-fluid">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body ">
+                            <form class="layui-form layui-col-space5">
+                                {% block search -%}{% endblock search -%}{{option::search()}}
+                            </form>
+                        </div>
+                        <div class="layui-card-header">{% block options %}{% endblock options -%} </div>
+                        <div class="layui-card-body ">
+                            {% block content -%} {% endblock content -%}
+                        </div>
+                        <div class="layui-card-body "> <div class="page" id="pager"></div> </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </body>
+</html>
+<script>
+    layui.use(['laydate','form', 'laypage', 'jquery'], function(){
+        var laydate = layui.laydate, form = layui.form, laypage = layui.laypage, $ = layui.jquery;
+    
+        // Bind the date control
+        $(".date-range").each(function() { laydate.render({elem: "#" + $(this).attr("id")}); });
+        
+        // Paging information
+        laypage.render({
+            elem: 'pager',
+            count: {{ pager.rows_total }},
+            limit: {{ pager.limit }},
+            curr: {{ pager.current }},
+            jump: function(obj, first) { 
+                if (first) { 
+                    return; 
+                }
+                var uArr = location.search.substring(1).split('&');
+                var query_string = '?page=' + obj.curr;
+                for (var i = 0; i < uArr.length; i++) { 
+                    var param = uArr[i];
+                    var sArr = param.split('=');
+                    if (sArr.length !== 2 || sArr[0] == 'page' || sArr[1] == '') { 
+                        continue;
+                    }
+                    query_string += '&' + param;
+                }
+                location.href = query_string;
+            }
+        });
+
+        // Add record
+        $(".record-add").click(function() { 
+            var that = $(this);
+            xadmin.open('Adding data', '/{{controller_name}}/edit/0', that.attr("w_width"), that.attr("w_height"));
+        });
+    
+        // Update record
+        $(".record-update").click(function() { 
+            var that = $(this);
+            xadmin.open('Change the data', '/{{controller_name}}/edit/' + that.attr("rid"), that.attr("w_width"), that.attr("w_height"));
+        });
+
+        // Delete record
+        $(".record-delete").click(function() { 
+            var that = $(this);
+            var id = that.attr("rid");
+            layer.confirm('Are you sure you want to delete this record?',function(){
+                //Send asynchronously delete data
+                var url = "/{{controller_name}}/delete/" + id;
+                $.get(url, function(res) { 
+                    if (res.code !== 0) { 
+                        layer.msg("Failed to delete", {icon: 1, time: 500});
+                        return;
+                    }
+                    $(that).parents("tr").remove();
+                    layer.msg('Successfully deleted!',{icon:1,time:1000});
+                });
+            });
+        });
+    });
+
+    function delAll (argument) {
+        var data = tableCheck.getData();
+        layer.confirm('Are you sure you want to delete?'+data,function(index){
+            //Catch all the selected ones and send them asynchronously for deletion
+            layer.msg('Successfully deleted', {icon: 1});
+            $(".layui-form-checked").not('.header').parents('tr').remove();
+        });
+    }
+</script>
+

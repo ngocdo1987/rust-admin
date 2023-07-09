@@ -1,0 +1,73 @@
+{% extends "_layouts/default.html" -%}
+{% block body %}
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form" id="edit_form">
+            {{ form::password(name="old_password", title="Old password") }}
+            {{ form::password(name="password", title="New password") }}
+            {{ form::password(name="re_password", title="Repeat password") }}
+            <div class="layui-form-item">
+                <label for="L_repass" class="layui-form-label"> </label>
+                <button  class="layui-btn" lay-filter="edit" lay-submit=""> change Password </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+layui.use(['jquery', 'layer', 'form'], function() { 
+    var $ = layui.jquery, layer = layui.layer, form = layui.form;
+
+    form.verify({
+        old_password: function(value) { 
+            if (value.length < 6 || value.length > 20) { 
+                return 'The length of the old password should be between 6-20';
+            }
+        },
+        password: function(value) { 
+            if (value.length < 6 || value.length > 20) { 
+                return 'The length of the new password should be between 6-20';
+            }
+        },
+        re_password: function(value) { 
+            if (value.length < 6 || value.length > 20) { 
+                return 'The length of the repeated password should be between 6-20';
+            }
+            var password = $("input[name=password]:first").val();
+            if (value != password) { 
+                return 'The password you input must be consistent';
+            }
+        }
+    });
+
+    //监听提交
+    form.on('submit(edit)', function() {
+        $.ajax({
+			url: "/index/change_pwd_save",
+			type: "post",
+			dataType: "json",
+            data: $("#edit_form").serializeArray(),
+            headers: {"content-type": "application/x-www-form-urlencoded"},
+			success: function(res) {
+                console.log(res);
+				if (res.code === 0) {
+					layer.alert('The password is modified successfully, please log in again', function() {
+                        $.get("/index/logout", function() { 
+                            xadmin.close(); //Close the current Frame
+                            //xadmin.father_reload(); //Refresh the father window
+                            location.href = "/";
+                        });
+					});
+                } else { 
+				    layer.alert(res.message, { icon: 7 });
+                }
+			},
+			error: function(res) {
+				layer.alert(res.message, { icon: 7 });
+			}
+		});
+
+        return false;
+    });
+});
+</script>
+{% endblock body -%}
