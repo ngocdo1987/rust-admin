@@ -1,45 +1,47 @@
 {% extends "_layouts/edit.html" -%}
 
 {% block body %}
-<script type="text/javascript" src="/static/js/aliyun-oss-sdk.min.js"></script>
-{{ form::input(name="title", title="Title/Name", value=row.title) }}
-{{ form::remark(name="remark", title="Remarks/Subdist", value=row.remark) }}
-{{ form::list(name="author_id", title="Video author", data=authors, value=row.author_id) }}
-{{ form::list(name="category_id", title="Video classification", data=categories, value=row.category_id) }}
-{{ form::checkboxes(name="tag_ids", title="Video label", data=tags, value=row.tag_ids) }}
-{{ form::file(name="cover_image", title="cover image", value=row.cover_image, length=380) }}
-{{ form::input(name="duration", title="Time (second)", value=row.duration, length=95) }}
-{{ form::seq(value=row.seq) }}
-{{ form::state(name="state", title="state", value=row.state) }}
-{{ form::yes_no(name="is_recommended", title="recommend", value=row.is_recommended) }}
-{{ form::input(name="url", title="Play address", value=row.url, length=380) }}
-<script>
-layui.validators = { 
-    title: function(value) { 
-        if (value.length < 2 || value.length > 50) { 
-            return 'The title length must be between 2-50: ' + value.length;
-        }
-    },
-    remark: function(value) { 
-        if (value.length < 2 || value.length > 100) { 
-            return 'The remark length must be between 2-100';
-        }
-    },
-    cover_imge: function(value) { 
-        if (value.length > 100) { 
-            return 'The cover picture length is too long';
-        }
-    },
-    duration: function(value) { 
-        if (isNaN(value)) { 
-            return 'Time must be numbers';
-        }
-    },
-    seq: function(value) { 
-        if (isNaN(value)) { 
-            return 'Sort must be effective numbers';
-        }
-    }
-};
-</script>
+    <script type="text/javascript" src="/static/js/aliyun-oss-sdk.min.js"></script>
+
+    {{ form::input(name="title", title="Title", value=row.title) }}
+    {{ form::remark(name="remark", title="Remarks", value=row.remark) }}
+    {{ form::list(name="author_id", title="Author ID", data=authors, value=row.author_id) }}
+    {{ form::list(name="category_id", title="Category ID", data=categories, value=row.category_id) }}
+    {{ form::checkboxes(name="tag_ids", title="Tag IDs", data=tags, value=row.tag_ids) }}
+    {{ form::file(name="cover_image", title="Cover image", value=row.cover_image, length=380) }}
+    {{ form::input(name="duration", title="Duration", value=row.duration, length=95) }}
+    {{ form::seq(value=row.seq) }}
+    {{ form::state(name="state", title="State", value=row.state) }}
+    {{ form::yes_no(name="is_recommended", title="Recommend", value=row.is_recommended) }}
+    {{ form::input(name="url", title="URL", value=row.url, length=380) }}
+
+    <script>
+        layui.validators = { 
+            title: function(value) { 
+                if (value.length < 2 || value.length > 50) { 
+                    return 'The title length must be between 2-50: ' + value.length;
+                }
+            },
+            remark: function(value) { 
+                if (value.length < 2 || value.length > 100) { 
+                    return 'The remark length must be between 2-100';
+                }
+            },
+            cover_imge: function(value) { 
+                if (value.length > 100) { 
+                    return 'The cover picture length is too long';
+                }
+            },
+            duration: function(value) { 
+                if (isNaN(value)) { 
+                    return 'Time must be numbers';
+                }
+            },
+            seq: function(value) { 
+                if (isNaN(value)) { 
+                    return 'Sort must be effective numbers';
+                }
+            }
+        };
+    </script>
 {% endblock body -%}

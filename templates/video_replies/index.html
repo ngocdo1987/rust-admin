@@ -1,12 +1,12 @@
 {% extends "_layouts/index.html" -%}
 
 {% block search -%}
-{{ search::input(name="video_id", title="Video ID", value=video_id)}}
-{{ search::input(name="reply_id", title="Reply ID", value=reply_id)}}
-{{ search::input(name="user_id", title="User ID", value=user_id)}}
-{{ search::input(name="user_name", title="user name", value=user_name)}}
-{{ search::input(name="content", title="comments", value=content)}}
-{{ search::range_date(name="created", title="add time", value_start=created_start, value_end=created_end)}}
+    {{ search::input(name="video_id", title="Video ID", value=video_id) }}
+    {{ search::input(name="reply_id", title="Reply ID", value=reply_id) }}
+    {{ search::input(name="user_id", title="User ID", value=user_id) }}
+    {{ search::input(name="user_name", title="user name", value=user_name) }}
+    {{ search::input(name="content", title="comments", value=content) }}
+    {{ search::range_date(name="created", title="add time", value_start=created_start, value_end=created_end) }}
 {% endblock search -%}
 
 {% block options -%}{{option::delete_all()}} {% endblock options -%}

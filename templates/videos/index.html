@@ -1,60 +1,62 @@
 {% extends "_layouts/index.html" -%}
 
 {% block search -%}
-{{ search::input(name="title", title="Title", value=title)}}
-{{ search::input(name="remark", title="Remark", value=remark)}}
-{{ search::range_date(name="created", title="Created at", value_start=created_start, value_end=created_end)}}
-{{ search::range_date(name="updated", title="Updated at", value_start=updated_start, value_end=updated_end)}}
-{{ search::range_number(name="duration", title="Duration", value_start=duration_start, value_end=duration_end)}}
+    {{ search::input(name="title", title="Title", value=title) }}
+    {{ search::input(name="remark", title="Remark", value=remark) }}
+    {{ search::range_date(name="created", title="Created at", value_start=created_start, value_end=created_end) }}
+    {{ search::range_date(name="updated", title="Updated at", value_start=updated_start, value_end=updated_end) }}
+    {{ search::range_number(name="duration", title="Duration", value_start=duration_start, value_end=duration_end) }}
 {% endblock search -%}
 
 {% block options -%}
-{{option::delete_all()}} {{option::add(height=650)}}
+    {{ option::delete_all() }} {{ option::add(height=650) }}
 {% endblock options -%}
 
 {% block content -%}
     <table class="layui-table layui-form">
-    <thead>
-        <tr>
-            <th style="width: 40px"> <input type="checkbox" name=""  lay-skin="primary"> </th>
-            <th class="row-id">ID</th>
-            <th>Title</th>
-            <th>Remark</th>
-            <th>Author</th>
-            <th>Cover</th>
-            <th>Duration</th>
-            <th>Sort</th>
-            <th>Status</th>
-            <th>Recommend</th>
-            <th>Actions</th>
-        </tr>
+        <thead>
+            <tr>
+                <th style="width: 40px"> <input type="checkbox" name=""  lay-skin="primary"> </th>
+                <th class="row-id">ID</th>
+                <th>Title</th>
+                <th>Remark</th>
+                <th>Author</th>
+                <th>Cover</th>
+                <th>Duration</th>
+                <th>Sort</th>
+                <th>Status</th>
+                <th>Recommend</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
         <tbody>
-        {% for r in records -%}
-        <tr>
-            <td> <input type="checkbox" name=""  lay-skin="primary"> </td>
-            <td>{{r.id}}</td>
-            <td>{{r.title}}</td>
-            <td>{{r.remark}}</td>
-            <td>{{r.author_id|author_name}}
-            <td><a href="#" link="{{r.cover_image}}" class="record-img" style="color: blue">Click to view</a></td>
-            <td>{{r.duration}}</td>
-            <td>{{r.seq}}</td>
-            <td>{{r.state|state_name}}</td>
-            <td>{{r.is_recommended|yes_no}}</td>
-            <td class="td-manage"> {{option::update(id=r.id, height=550)}} | {{option::delete(id=r.id)}} </td>
-        </tr>
-        {% endfor -%}
+            {% for r in records -%}
+            <tr>
+                <td> <input type="checkbox" name=""  lay-skin="primary"> </td>
+                <td>{{ r.id }}</td>
+                <td>{{ r.title }}</td>
+                <td>{{ r.remark }}</td>
+                <td>{{ r.author_id|author_name }}
+                <td><a href="#" link="{{r.cover_image}}" class="record-img" style="color: blue">Click to view</a></td>
+                <td>{{ r.duration }}</td>
+                <td>{{ r.seq }}</td>
+                <td>{{ r.state|state_name }}</td>
+                <td>{{ r.is_recommended|yes_no }}</td>
+                <td class="td-manage"> {{ option::update(id=r.id, height=550) }} | {{ option::delete(id=r.id) }} </td>
+            </tr>
+            {% endfor -%}
         </tbody>
-    </thead>
+        
     </table>
-<script>
-layui.use(['jquery'], function() { 
-    var $ = layui.jquery;
-    $(".record-img").click(function() { // display image
-        var that = $(this);
-        var img_url = that.attr("link");
-        xadmin.open('Photo path: ' + img_url, img_url);
-    });
-});
-</script>
+
+    <script>
+        layui.use(['jquery'], function() { 
+            var $ = layui.jquery;
+            $(".record-img").click(function() { // display image
+                var that = $(this);
+                var img_url = that.attr("link");
+                xadmin.open('Photo path: ' + img_url, img_url);
+            });
+        });
+    </script>
 {% endblock content -%}

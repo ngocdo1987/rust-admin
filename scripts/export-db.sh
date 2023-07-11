@@ -1,22 +1,22 @@
 #!/bin/bash
 
-#主机地址
+#Host address
 #host='locahost'
-#数据库名
+#Database name
 name='rust_admin'
-#用户名称
+#user name
 user='rust_admin'
-#登录密码
+#login password
 password='rust-x-lsl'
 
-#备份的文件名称, 格式: 年月日.SQL
+#Backup file name, format: year, month, day.sql
 sql_file="`date '+%Y%M%d'`.SQL"
 if [ -f $sql_file ]; then
     rm -rf $sql_file
 fi
 
-#mysqldump路径
+#mysqldump path
 dump_bin='mysqldump'
 
-#执行备份
+#Execute backup
 $dump_bin -u$user -p"$password" $name > $sql_file

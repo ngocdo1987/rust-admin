@@ -1,49 +1,49 @@
 {% extends "_layouts/index.html" -%}
 
 {% block search -%}
-{{ search::input(name="id", title="User ID", value=id)}}
-{{ search::input(name="name", title="user name", value=name)}}
-{{ search::state(name=state)}}
-{{ search::range_date(name="created", title="Registration time", value_start=created_start, value_end=created_end)}}
-{{ search::range_date(name="last_login", title="Log in time", value_start=last_login_start, value_end=last_login_end)}}
-{{ search::range_date(name="updated", title="Change the time", value_start=updated_start, value_end=updated_end)}}
+    {{ search::input(name="id", title="ID", value=id) }}
+    {{ search::input(name="name", title="Name", value=name) }}
+    {{ search::state(name=state) }}
+    {{ search::range_date(name="created", title="Created at", value_start=created_start, value_end=created_end) }}
+    {{ search::range_date(name="last_login", title="Last login time", value_start=last_login_start, value_end=last_login_end) }}
+    {{ search::range_date(name="updated", title="Updated at", value_start=updated_start, value_end=updated_end) }}
 {% endblock search -%}
 
 {% block options -%}
-{{option::delete_all()}} {{option::add(height=300)}}
+    {{ option::delete_all() }} {{ option::add(height=300) }}
 {% endblock options -%}
 
 {% block content -%}
-<table class="layui-table layui-form">
-<thead>
-    <tr>
-        <th style="width: 40px"> <input type="checkbox" name=""  lay-skin="primary"> </th>
-        <th class="row-id">serial number</th>
-        <th>user name</th>
-        <th>Last login IP</th>
-        <th>state</th>
-        <th>Number of login</th>
-        <th>last login time</th>
-        <th>Add time</th>
-        <th>latest update</th>
-        <th>operate</th>
-    </tr>
-    <tbody>
-    {% for r in records -%}
-    <tr>
-        <td> <input type="checkbox" name=""  lay-skin="primary"> </td>
-        <td>{{ r.id }}</td>
-        <td>{{ r.name }}</td>
-        <td>{{ r.last_ip }}</td>
-        <td>{{ r.state }}</td>
-        <td>{{ r.login_count }}</td>
-        <td>{{ r.last_login|date(format="%Y-%m-%d %H:%M") }}</td>
-        <td>{{ r.created|date(format="%Y-%m-%d %H:%M") }}</td>
-        <td>{{ r.updated|date(format="%Y-%m-%d %H:%M") }}</td>
-        <td class="td-manage"> {{option::update(id=r.id, height=300)}} | {{option::delete(id=r.id)}} </td>
-    </tr>
-    {% endfor -%}
-    </tbody>
-</thead>
-</table>
+    <table class="layui-table layui-form">
+        <thead>
+            <tr>
+                <th style="width: 40px"> <input type="checkbox" name=""  lay-skin="primary"> </th>
+                <th class="row-id">ID</th>
+                <th>Name</th>
+                <th>Last login IP</th>
+                <th>State</th>
+                <th>Login count</th>
+                <th>Last login time</th>
+                <th>Created at</th>
+                <th>Updated at</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in records -%}
+            <tr>
+                <td> <input type="checkbox" name=""  lay-skin="primary"> </td>
+                <td>{{ r.id }}</td>
+                <td>{{ r.name }}</td>
+                <td>{{ r.last_ip }}</td>
+                <td>{{ r.state }}</td>
+                <td>{{ r.login_count }}</td>
+                <td>{{ r.last_login|date(format="%Y-%m-%d %H:%M") }}</td>
+                <td>{{ r.created|date(format="%Y-%m-%d %H:%M") }}</td>
+                <td>{{ r.updated|date(format="%Y-%m-%d %H:%M") }}</td>
+                <td class="td-manage"> {{ option::update(id=r.id, height=300) }} | {{ option::delete(id=r.id) }} </td>
+            </tr>
+            {% endfor -%}
+        </tbody>
+    </table>
 {% endblock content -%}
