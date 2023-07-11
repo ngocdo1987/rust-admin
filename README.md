@@ -46,7 +46,7 @@ Tera: https://tera.netlify.com/docs/
 
 
 ## Environmental requirements
-rust: 1.40+ / Mysql: 5.6+ / Nginx: 1.0+ (可选, 如果通过域名/80端口代理方式访问则需要)
+rust: 1.40+ / Mysql: 5.6+ / Nginx: 1.0+ (Optional, you need to access it through the domain name/80 port agency method)
 
 ## Directory description
 #### /public Used to set the website address of Nginx outside
@@ -70,7 +70,7 @@ rust: 1.40+ / Mysql: 5.6+ / Nginx: 1.0+ (可选, 如果通过域名/80端口代�
 #### Download code
 
 ```bash
-git clone https://gitee.com/houhanting/rust-admin.git
+git clone git@github.com:ngocdo1987/rust-admin.git
 cd rust-admin
 ```
 
