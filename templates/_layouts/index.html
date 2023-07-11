@@ -15,7 +15,7 @@
         <div class="x-nav">
             <span class="layui-breadcrumb">
                 <a href="#">Front page</a>
-                {{bread_path|safe}}
+                {{ bread_path|safe }}
                 <!--<a href="">Demo</a>
                 <a> <cite>Navigation elements</cite></a>-->
             </span>
@@ -29,7 +29,7 @@
                     <div class="layui-card">
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5">
-                                {% block search -%}{% endblock search -%}{{option::search()}}
+                                {% block search -%}{% endblock search -%}{{ option::search() }}
                             </form>
                         </div>
                         <div class="layui-card-header">{% block options %}{% endblock options -%} </div>
@@ -77,29 +77,29 @@
         // Add record
         $(".record-add").click(function() { 
             var that = $(this);
-            xadmin.open('Adding data', '/{{controller_name}}/edit/0', that.attr("w_width"), that.attr("w_height"));
+            xadmin.open('Adding data', '/{{ controller_name }}/edit/0', that.attr("w_width"), that.attr("w_height"));
         });
     
         // Update record
         $(".record-update").click(function() { 
             var that = $(this);
-            xadmin.open('Change the data', '/{{controller_name}}/edit/' + that.attr("rid"), that.attr("w_width"), that.attr("w_height"));
+            xadmin.open('Change the data', '/{{ controller_name }}/edit/' + that.attr("rid"), that.attr("w_width"), that.attr("w_height"));
         });
 
         // Delete record
         $(".record-delete").click(function() { 
             var that = $(this);
             var id = that.attr("rid");
-            layer.confirm('Are you sure you want to delete this record?',function(){
+            layer.confirm('Are you sure you want to delete this record?', function(){
                 //Send asynchronously delete data
-                var url = "/{{controller_name}}/delete/" + id;
+                var url = "/{{ controller_name }}/delete/" + id;
                 $.get(url, function(res) { 
                     if (res.code !== 0) { 
                         layer.msg("Failed to delete", {icon: 1, time: 500});
                         return;
                     }
                     $(that).parents("tr").remove();
-                    layer.msg('Successfully deleted!',{icon:1,time:1000});
+                    layer.msg('Successfully deleted!', {icon:1,time:1000});
                 });
             });
         });
@@ -107,7 +107,7 @@
 
     function delAll (argument) {
         var data = tableCheck.getData();
-        layer.confirm('Are you sure you want to delete?'+data,function(index){
+        layer.confirm('Are you sure you want to delete?' + data, function(index) {
             //Catch all the selected ones and send them asynchronously for deletion
             layer.msg('Successfully deleted', {icon: 1});
             $(".layui-form-checked").not('.header').parents('tr').remove();

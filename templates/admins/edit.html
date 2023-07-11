@@ -1,9 +1,9 @@
 {% extends "_layouts/edit.html" -%}
 {% block body %}
-{{ form::input(name="name", title="user name", value=row.name) }}
-{{ form::password(name="password", title="login password") }}
-{{ form::password(name="re_password", title="Repeat password") }}
-{{ form::state(value=row.state) }}
-{{ form::list(name="role_id", title="Role", data=roles, value=row.role_id) }}
-{{ form::seq(value=row.seq)}}
+    {{ form::input(name="name", title="Name", value=row.name) }}
+    {{ form::password(name="password", title="Password") }}
+    {{ form::password(name="re_password", title="Repeat password") }}
+    {{ form::state(value=row.state) }}
+    {{ form::list(name="role_id", title="Role", data=roles, value=row.role_id) }}
+    {{ form::seq(value=row.seq) }}
 {% endblock body -%}

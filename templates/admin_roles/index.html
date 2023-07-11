@@ -1,19 +1,19 @@
 {% extends "_layouts/index.html" -%}
 
 {% block search -%}
-{{search::input(name="name", title="Name", value=name)}}
-{{search::input(name="remark", title="Remark", value=remark)}}
+{{ search::input(name="name", title="Name", value=name) }}
+{{ search::input(name="remark", title="Remark", value=remark) }}
 {% endblock search -%}
 
 {% block options -%}
-{{option::delete_all()}} {{option::add(height=700)}} 
+{{ option::delete_all() }} {{ option::add(height=700) }} 
 {% endblock options -%}
 
 {% block content -%}
 <table class="layui-table layui-form">
 <thead>
     <tr>
-        <th style="width: 40px"> <input type="checkbox" name=""  lay-skin="primary"> </th>
+        <th style="width: 40px"> <input type="checkbox" name="" lay-skin="primary"> </th>
         <th class="row-id">ID</th>
         <th>Role Name</th>
         <th>Remark</th>
@@ -26,7 +26,7 @@
         <td>{{ r.id }}</td>
         <td>{{ r.name }}</td>
         <td>{{ r.remark }}</td>
-        <td class="td-manage"> {{option::update(id=r.id, height=600)}} | {{option::delete(id=r.id)}} </td>
+        <td class="td-manage"> {{ option::update(id=r.id, height=600) }} | {{ option::delete(id=r.id) }} </td>
     </tr>
     {% endfor -%}
     </tbody>

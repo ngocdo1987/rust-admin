@@ -30,8 +30,8 @@ impl ModelBackend for AdminRoles {
 
     fn validate(data: &HashMap<String, String>) -> Result<(), String> { 
         Validator::load(&data)
-            .string_length("name", "The classification name must be between 2-20", 2, 20, true)
-            .string_limit("remark", "The remark length must be between 0-50", 50)
+            .string_length("name", "Role name's length must be between 2-20", 2, 20, true)
+            .string_limit("remark", "Remark's length must be between 0-50", 50)
             .is_numeric("seq", "Sort must be effective numbers")
             .validate()
     }

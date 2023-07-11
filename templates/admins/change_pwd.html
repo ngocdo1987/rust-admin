@@ -8,7 +8,7 @@
             {{ form::password(name="re_password", title="Repeat password") }}
             <div class="layui-form-item">
                 <label for="L_repass" class="layui-form-label"> </label>
-                <button  class="layui-btn" lay-filter="edit" lay-submit=""> change Password </button>
+                <button  class="layui-btn" lay-filter="edit" lay-submit=""> Change password </button>
             </div>
         </form>
     </div>
@@ -39,7 +39,7 @@ layui.use(['jquery', 'layer', 'form'], function() {
         }
     });
 
-    //监听提交
+    // Monitoring and submission
     form.on('submit(edit)', function() {
         $.ajax({
 			url: "/index/change_pwd_save",
@@ -52,8 +52,8 @@ layui.use(['jquery', 'layer', 'form'], function() {
 				if (res.code === 0) {
 					layer.alert('The password is modified successfully, please log in again', function() {
                         $.get("/index/logout", function() { 
-                            xadmin.close(); //Close the current Frame
-                            //xadmin.father_reload(); //Refresh the father window
+                            xadmin.close(); // Close the current Frame
+                            //xadmin.father_reload(); // Refresh the father window
                             location.href = "/";
                         });
 					});

@@ -22,10 +22,10 @@
             <div class="layui-row">
                 <form class="layui-form" id="edit_form">
                     {% block body -%} {% endblock body -%}
-                    <input type="hidden" value="{{id}}" name="id" />
+                    <input type="hidden" value="{{ id }}" name="id" />
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"> </label>
-                        <button  class="layui-btn" lay-filter="save" lay-submit=""> &nbsp; 保 &nbsp;&nbsp;&nbsp;&nbsp; 存 &nbsp; </button>
+                        <button  class="layui-btn" lay-filter="save" lay-submit=""> &nbsp; Save &nbsp;&nbsp;&nbsp;&nbsp; 存 &nbsp; </button>
                     </div>
                 </form>
             </div>
@@ -38,17 +38,17 @@ layui.use(['form', 'layer', 'jquery'], function() {
     //var form = layui.form,
     //layer = layui.layer;
 
-    //自定义验证规则
+    //Custom verification rules
     //form.verify({
     //    name: function(value) {
     //        if (value.length < 5) {
-    //            return '昵称至少得5个字符啊';
+    //            return 'The nickname has at least 5 characters';
     //        }
     //    }//,
-    //    //pass: [/(.+){6,12}$/, '密码必须6到12位'],
+    //    //pass: [/(.+){6,12}$/, 'Password must be 6 to 12 digits'],
     //    //repass: function(value) {
     //    //    if ($('#L_pass').val() != $('#L_repass').val()) {
-    //    //        return '两次密码不一致';
+    //    //        return 'Two passwords are inconsistent';
     //    //    }
     //    //}
     //});
@@ -57,7 +57,7 @@ layui.use(['form', 'layer', 'jquery'], function() {
 
     //Monitoring and submission
     form.on('submit(save)', function() {
-        var action = "/{{ controller_name }}/save/{{id}}";
+        var action = "/{{ controller_name }}/save/{{ id }}";
         var edit_form = $("#edit_form");
         $.ajax({
 			url: action,
@@ -81,13 +81,13 @@ layui.use(['form', 'layer', 'jquery'], function() {
 			}
 		});
         //console.log(data);
-        ////发异步，把数据提交给php
-        //layer.alert("增加成功", {
+        ////Switch to different walks, submit the data to PHP
+        //layer.alert("Increase", {
         //    icon: 6
         //}, function() {
-        //    //关闭当前frame
+        //    //Close the current Frame
         //    xadmin.close();
-        //    // 可以对父窗口进行刷新 
+        //    // Can refresh the parent window 
         //    xadmin.father_reload();
         //});
         return false;

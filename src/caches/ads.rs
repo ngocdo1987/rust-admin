@@ -18,10 +18,10 @@ lazy_static! {
 lazy_static! { 
     pub static ref POSITIONS: HashMap<usize, &'static str> = { 
         let mut data = HashMap::new();
-        data.insert(0, "top");
+        data.insert(0, "Top");
         data.insert(1, "Middle left");
         data.insert(2, "Middle right");
-        data.insert(3, "bottom");
+        data.insert(3, "Bottom");
         data
     };
 }

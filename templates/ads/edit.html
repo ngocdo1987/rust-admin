@@ -1,15 +1,15 @@
 {% extends "_layouts/edit.html" -%}
 {% block body %}
-{{ form::input(name="name", title="Name", value=row.name) }}
-{{ form::remark(value=row.remark) }}
-{{ form::seq(value=row.seq) }}
-<script>
-layui.validators = { 
-    name: function(value) { 
-        if (value.length < 5) { 
-            return 'Name at least 5 characters';
-        }
-    }
-};
-</script>
+    {{ form::input(name="name", title="Name", value=row.name) }}
+    {{ form::remark(value=row.remark) }}
+    {{ form::seq(value=row.seq) }}
+    <script>
+        layui.validators = { 
+            name: function(value) { 
+                if (value.length < 5) { 
+                    return 'Name at least 5 characters';
+                }
+            }
+        };
+    </script>
 {% endblock body -%}

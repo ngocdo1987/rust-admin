@@ -1,33 +1,33 @@
 {% extends "_layouts/edit.html" -%}
 
 {% block body %}
-{{ form::input(name="name", title="Navigation name", value=row.name) }}
-{{ form::input(name="url", title="link address", value=row.url, length=200) }}
-{{ form::remark(value=row.remark)}}
-{{ form::yes_no(name="is_blank", title="Whether an external link", value=row.is_blank) }}
-{{ form::seq(value=row.seq) }}
-<script>
-layui.validators = { 
-    name: function(value) { 
-        if (value.length < 2 || value.length > 20) { 
-            return 'The length of the navigation should be between 2-20';
+    {{ form::input(name="name", title="Navigation name", value=row.name) }}
+    {{ form::input(name="url", title="Link address", value=row.url, length=200) }}
+    {{ form::remark(value=row.remark) }}
+    {{ form::yes_no(name="is_blank", title="Whether an external link", value=row.is_blank) }}
+    {{ form::seq(value=row.seq) }}
+    <script>
+    layui.validators = { 
+        name: function(value) { 
+            if (value.length < 2 || value.length > 20) { 
+                return 'The length of the navigation should be between 2-20';
+            }
+        },
+        url: function(value) { 
+            if (/^\s*$/.test(value) || value.length > 200) { 
+                return 'The external link address is wrong';
+            }
+        },
+        remark: function(value) { 
+            if (value.length > 200) { 
+                return 'The length of the remarks cannot exceed 20 characters';
+            }
+        },
+        seq: function(value) { 
+            if (isNaN(value)) { 
+                return 'Sort must be effective numbers';
+            }
         }
-    },
-    url: function(value) { 
-        if (/^\s*$/.test(value) || value.length > 200) { 
-            return 'The external link address is wrong';
-        }
-    },
-    remark: function(value) { 
-        if (value.length > 200) { 
-            return 'The length of the remarks cannot exceed 20 characters';
-        }
-    },
-    seq: function(value) { 
-        if (isNaN(value)) { 
-            return 'Sort must be effective numbers';
-        }
-    }
-};
-</script>
+    };
+    </script>
 {% endblock body -%}

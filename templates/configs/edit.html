@@ -1,38 +1,39 @@
 {% extends "_layouts/edit.html" -%}
 
 {% block body %}
-{{ form::input(name="site_name", title="Website name", value=row.site_name, length=380) }}
-{{ form::input(name="site_url", title="Website URL", value=row.site_url, length=380) }}
-{{ form::textarea(name="seo_keyword", title="Seo keyword", value=row.seo_keyword) }}
-{{ form::textarea(name="seo_desc", title="Seo description", value=row.seo_desc) }}
-{{ form::textarea(name="copyright", title="Copyright Information", value=row.copyright) }}
-<script>
-layui.validators = { 
-    site_name: function(value) { 
-        if (/^\s+$/.test(value)) { 
-            return 'Must enter the website name';
+    {{ form::input(name="site_name", title="Website name", value=row.site_name, length=380) }}
+    {{ form::input(name="site_url", title="Website URL", value=row.site_url, length=380) }}
+    {{ form::textarea(name="seo_keyword", title="Seo keyword", value=row.seo_keyword) }}
+    {{ form::textarea(name="seo_desc", title="Seo description", value=row.seo_desc) }}
+    {{ form::textarea(name="copyright", title="Copyright Information", value=row.copyright) }}
+    
+    <script>
+    layui.validators = { 
+        site_name: function(value) { 
+            if (/^\s+$/.test(value)) { 
+                return 'Must enter the website name';
+            }
+        },
+        site_url: function(value) { 
+            if (/^\s+$/.test(value)) { 
+                return 'Must enter the website website';
+            }
+        },
+        site_keyword: function(value) { 
+            if (value.length > 200) { 
+                return 'SEO description cannot exceed 200 characters';
+            }
+        },
+        site_desc: function(value) { 
+            if (value.length > 200) { 
+                return 'Website description cannot exceed 200 characters';
+            }
+        },
+        copyright: function(value) { 
+            if (value.length > 200) { 
+                return 'Copyright information cannot exceed 200 characters';
+            }
         }
-    },
-    site_url: function(value) { 
-        if (/^\s+$/.test(value)) { 
-            return 'Must enter the website website';
-        }
-    },
-    site_keyword: function(value) { 
-        if (value.length > 200) { 
-            return 'SEO description cannot exceed 200 characters';
-        }
-    },
-    site_desc: function(value) { 
-        if (value.length > 200) { 
-            return 'Website description cannot exceed 200 characters';
-        }
-    },
-    copyright: function(value) { 
-        if (value.length > 200) { 
-            return 'Copyright information cannot exceed 200 characters';
-        }
-    }
-};
-</script>
+    };
+    </script>
 {% endblock body -%}

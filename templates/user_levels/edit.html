@@ -1,38 +1,39 @@
 {% extends "_layouts/edit.html" -%}
 {% block body %}
-{{ form::input(name="name", title="name", value=row.name) }}
-{{ form::remark(value=row.remark) }}
-{{ form::number(name="watch_per_day", title="See you daily", value=row.watch_per_day) }}
-{{ form::number(name="score_min", title="Minimum", value=row.score_min) }}
-{{ form::number(name="score_max", title="Maximum", value=row.score_max) }}
-{{ form::seq(value=row.seq) }}
-<script>
-layui.validators = { 
-    name: function(value) { 
-        if (value.length < 3 || value.length > 20) { 
-            return 'The length of the level name must be between 3-20';
-        }
-    },
-    remark: function(value) { 
-        if (value.length > 100) { 
-            return 'The length must not be greater than 200 characters';
-        }
-    },
-    watch_per_day: function(value) { 
-        if (value < 0) { 
-            return 'You can see it daily, you can’t be negative numbers';
-        }
-    },
-    score_min: function(value) { 
-        if (value <  0) { 
-            return 'The minimum points cannot be negative';
-        }
-    },
-    score_max: function(value) { 
-        if (value < 0) { 
-            return 'The maximum points cannot be negative';
-        }
-    }
-};
-</script>
+    {{ form::input(name="name", title="Name", value=row.name) }}
+    {{ form::remark(value=row.remark) }}
+    {{ form::number(name="watch_per_day", title="See you daily", value=row.watch_per_day) }}
+    {{ form::number(name="score_min", title="Min score", value=row.score_min) }}
+    {{ form::number(name="score_max", title="Max score", value=row.score_max) }}
+    {{ form::seq(value=row.seq) }}
+
+    <script>
+        layui.validators = { 
+            name: function(value) { 
+                if (value.length < 3 || value.length > 20) { 
+                    return 'The length of name must be between 3-20';
+                }
+            },
+            remark: function(value) { 
+                if (value.length > 100) { 
+                    return 'The length must not be greater than 200 characters';
+                }
+            },
+            watch_per_day: function(value) { 
+                if (value < 0) { 
+                    return 'You can see it daily, you can’t be negative numbers';
+                }
+            },
+            score_min: function(value) { 
+                if (value <  0) { 
+                    return 'The minimum points cannot be negative';
+                }
+            },
+            score_max: function(value) { 
+                if (value < 0) { 
+                    return 'The maximum points cannot be negative';
+                }
+            }
+        };
+    </script>
 {% endblock body -%}

@@ -1,24 +1,24 @@
 {% extends "_layouts/edit.html" -%}
 {% block body %}
-{{ form::input(name="name", title="Role Name", value=row.name) }}
+{{ form::input(name="name", title="Role name", value=row.name) }}
 {{ form::remark(value=row.remark) }}
 {% set ids = "," ~ row.menu_ids ~ "," -%}
 <div class="layui-form-item">
-    <label for="menus" class="layui-form-label"> <span class="x-red">*</span>Menu permissions: </label>
+    <label for="menus" class="layui-form-label"> <span class="x-red">*</span> Menu permissions: </label>
     <div class="layui-input-inline" style="width: 380px;">
         {% for menu in menus -%}
         <fieldset class="layui-elem-field" style="background-color: #fff">
-            <legend style="font-size: 13px;">{{menu.name}}</legend>
+            <legend style="font-size: 13px;">{{ menu.name }}</legend>
             <div class="layui-field-box"> 
                 {% for sub in menu.menus -%}
                 {% set my_id = "," ~ sub.id ~ "," %}
-                <input type="checkbox" class="sub_menu" name="sub_menu_{{sub.id}}" title="{{sub.name}}" lay-skin="primary" value="{{sub.id}}" {% if ids is containing(my_id) %}checked="checked"{% endif %} />
+                <input type="checkbox" class="sub_menu" name="sub_menu_{{ sub.id }}" title="{{ sub.name }}" lay-skin="primary" value="{{ sub.id }}" {% if ids is containing(my_id) %}checked="checked"{% endif %} />
                 {% endfor -%}
             </div>
         </fieldset>
         {% endfor -%}
     </div>
-    <input type="hidden" value="{{row.menu_ids}}" name="menu_ids" id="menu_ids" />
+    <input type="hidden" value="{{ row.menu_ids }}" name="menu_ids" id="menu_ids" />
     <div class="layui-form-mid layui-word-aux"> </div>
 </div>
 {{ form::seq(value=row.seq) }}
